@@ -12,11 +12,17 @@ type Category = {
 };
 
 const renderCategoryItem: ListRenderItem<Category> = ({ item }) => (
-  <CategoryGridTile title={item.title} />
+  <CategoryGridTile title={item.title} color={item.color} />
 );
 
 const CategoriesScreen: React.FC<Props> = () => {
-  return <FlatList data={CATEGORIES} renderItem={renderCategoryItem} />;
+  return (
+    <FlatList
+      data={CATEGORIES}
+      renderItem={renderCategoryItem}
+      numColumns={2}
+    />
+  );
 };
 
 export default CategoriesScreen;
