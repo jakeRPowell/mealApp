@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, ListRenderItem } from 'react-native';
 import { CATEGORIES } from '../data/dummy-data';
+import CategoryGridTile from '../components/CategoryGridTile';
 
 type Props = {};
 
@@ -10,13 +11,11 @@ type Category = {
   color: string;
 };
 
-const CategoriesScreen: React.FC<Props> = () => {
-  const renderCategoryItem: ListRenderItem<Category> = ({ item }) => (
-    <View>
-      <Text>{item.title}</Text>
-    </View>
-  );
+const renderCategoryItem: ListRenderItem<Category> = ({ item }) => (
+  <CategoryGridTile title={item.title} />
+);
 
+const CategoriesScreen: React.FC<Props> = () => {
   return <FlatList data={CATEGORIES} renderItem={renderCategoryItem} />;
 };
 
