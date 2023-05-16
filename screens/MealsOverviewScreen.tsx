@@ -45,9 +45,7 @@ const MealsOverview = ({ route, navigation }) => {
 
   const renderMealItem: ListRenderItem<Meal> = ({ item }) => {
     const pressHandler = () => {
-      navigation.navigate('MealsDetail', {
-        itemId: item.id,
-      });
+      navigation.navigate('MealsDetail', { itemId: item.id });
     };
 
     const mealItemProps = {
