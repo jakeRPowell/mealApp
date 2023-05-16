@@ -44,12 +44,19 @@ const MealsOverview = ({ route, navigation }) => {
   });
 
   const renderMealItem: ListRenderItem<Meal> = ({ item }) => {
+    const pressHandler = () => {
+      navigation.navigate('MealsDetail', {
+        itemId: item.id,
+      });
+    };
+
     const mealItemProps = {
       title: item.title,
       imageUrl: item.imageUrl,
       duration: item.duration,
       complexity: item.complexity,
       affordability: item.affordability,
+      onPress: pressHandler,
     };
     return <MealItem {...mealItemProps} />;
   };

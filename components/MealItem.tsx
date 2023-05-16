@@ -17,12 +17,20 @@ const renderIcons = (name, count) => {
   return icons;
 };
 
-const MealItem = ({ title, imageUrl, duration, complexity, affordability }) => {
+const MealItem = ({
+  title,
+  imageUrl,
+  duration,
+  complexity,
+  affordability,
+  onPress,
+}) => {
   return (
     <ShadowCard stylesProp={styles.mealItem}>
       <Pressable
         android_ripple={{ color: '#ccc' }}
         style={({ pressed }) => [pressed ? styles.mealItemPressed : null]}
+        onPress={onPress}
       >
         <Image source={{ uri: imageUrl }} style={styles.image} />
         <View style={styles.mealItemInner}>
