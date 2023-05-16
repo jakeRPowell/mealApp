@@ -24,12 +24,14 @@ const MealItem = ({ title, imageUrl, duration, complexity, affordability }) => {
         <Image source={{ uri: imageUrl }} style={styles.image} />
         <View style={styles.mealItemInner}>
           <Text style={styles.title}>{title}</Text>
-          <Text>
-            <FontAwesome5 name="clock" size={24} color="black" />
-            {duration}
-          </Text>
-          <Text>{renderIcons('cog', complexity)}</Text>
-          <Text>{renderIcons('pound-sign', affordability)}</Text>
+          <View style={styles.infoBox}>
+            <View style={styles.timeBox}>
+              <FontAwesome5 name="clock" size={24} color="black" />
+              <Text>{duration}</Text>
+            </View>
+            <Text>{renderIcons('cog', complexity)}</Text>
+            <Text>{renderIcons('pound-sign', affordability)}</Text>
+          </View>
         </View>
       </Pressable>
     </View>
@@ -58,6 +60,17 @@ const styles = StyleSheet.create({
     height: 200,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
+  },
+  infoBox: {
+    flexDirection: 'row',
+    gap: 8,
+    paddingTop: 16,
+  },
+  timeBox: {
+    flexDirection: 'row',
+    gap: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
     fontSize: 18,
