@@ -3,6 +3,8 @@ import { useLayoutEffect } from 'react';
 import { MEALS } from '../data/dummy-data';
 import ShadowCard from '../components/ShadowCard';
 import renderIcons from '../utils/renderIcons';
+import Ingredients from '../components/Ingredients';
+import Step from '../components/Step';
 
 const MealDetailScreen = ({ route, navigation }) => {
   const details = route.params;
@@ -15,7 +17,9 @@ const MealDetailScreen = ({ route, navigation }) => {
   return (
     <View>
       <Image source={{ uri: data.imageUrl }} style={styles.image} />
-      <View>
+      <View style={styles.container}>
+        <Text style={styles.title}>{data.title}</Text>
+
         <ShadowCard stylesProp={styles.infoBox}>
           <View style={styles.infoDetail}>
             {renderIcons('clock')}
@@ -29,15 +33,14 @@ const MealDetailScreen = ({ route, navigation }) => {
           </Text>
         </ShadowCard>
 
-        <Text style={styles.title}>{data.title}</Text>
-        <Text>{data.duration}</Text>
-        <Text>{data.complexity}</Text>
-        <Text>{data.affordability}</Text>
-        {data.ingredients.map((ingredient) => (
-          <Text key={ingredient}>{ingredient}</Text>
-        ))}
+        <ShadowCard stylesProp={styles.main}>
+          <Text>{data.duration}</Text>
+          <Text>{data.complexity}</Text>
+          <Text>{data.affordability}</Text>
+          <Ingredients ingredients={data.ingredients} />
+        </ShadowCard>
         {data.steps.map((step) => (
-          <Text key={step}>{step}</Text>
+          <Step key={step} step={step} />
         ))}
       </View>
     </View>
@@ -47,6 +50,9 @@ const MealDetailScreen = ({ route, navigation }) => {
 export default MealDetailScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+  },
   image: {
     width: '100%',
     height: 300,
@@ -55,7 +61,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: 8,
-    paddingTop: 16,
+    padding: 16,
+    borderRadius: 8,
+    marginBottom: 16,
   },
   infoDetail: {
     flex: 1,
@@ -63,6 +71,10 @@ const styles = StyleSheet.create({
     gap: 4,
     justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  main: {
+    padding: 16,
+    borderRadius: 8,
   },
   title: {
     fontWeight: 'bold',
