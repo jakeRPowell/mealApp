@@ -2,15 +2,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { useLayoutEffect } from 'react';
 import { MEALS } from '../data/dummy-data';
 import ShadowCard from '../components/ShadowCard';
-import { FontAwesome5 } from '@expo/vector-icons';
-
-const renderIcons = (name, count) => {
-  const icons = [];
-  for (let i = 0; i < count; i++) {
-    icons.push(<FontAwesome5 key={i} name={name} size={24} color="black" />);
-  }
-  return icons;
-};
+import renderIcons from '../utils/renderIcons';
 
 const MealDetailScreen = ({ route, navigation }) => {
   const details = route.params;
@@ -26,7 +18,7 @@ const MealDetailScreen = ({ route, navigation }) => {
       <View>
         <ShadowCard stylesProp={styles.infoBox}>
           <View style={styles.infoDetail}>
-            <FontAwesome5 name="clock" size={24} color="black" />
+            {renderIcons('clock')}
             <Text>{data.duration}</Text>
           </View>
           <Text style={[{ textAlign: 'center' }, styles.infoDetail]}>

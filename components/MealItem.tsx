@@ -1,21 +1,6 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  Image,
-  Platform,
-} from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
 import ShadowCard from './ShadowCard';
-
-const renderIcons = (name, count) => {
-  const icons = [];
-  for (let i = 0; i < count; i++) {
-    icons.push(<FontAwesome5 key={i} name={name} size={24} color="black" />);
-  }
-  return icons;
-};
+import renderIcons from '../utils/renderIcons';
 
 const MealItem = ({
   title,
@@ -37,7 +22,8 @@ const MealItem = ({
           <Text style={styles.title}>{title}</Text>
           <View style={styles.infoBox}>
             <View style={styles.infoDetail}>
-              <FontAwesome5 name="clock" size={24} color="black" />
+              {renderIcons('clock')}
+
               <Text>{duration}</Text>
             </View>
             <Text style={[{ textAlign: 'center' }, styles.infoDetail]}>
