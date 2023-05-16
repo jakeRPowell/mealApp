@@ -25,12 +25,16 @@ const MealItem = ({ title, imageUrl, duration, complexity, affordability }) => {
         <View style={styles.mealItemInner}>
           <Text style={styles.title}>{title}</Text>
           <View style={styles.infoBox}>
-            <View style={styles.timeBox}>
+            <View style={styles.infoDetail}>
               <FontAwesome5 name="clock" size={24} color="black" />
               <Text>{duration}</Text>
             </View>
-            <Text>{renderIcons('cog', complexity)}</Text>
-            <Text>{renderIcons('pound-sign', affordability)}</Text>
+            <Text style={[{ textAlign: 'center' }, styles.infoDetail]}>
+              {renderIcons('cog', complexity)}
+            </Text>
+            <Text style={[{ textAlign: 'right' }, styles.infoDetail]}>
+              {renderIcons('pound-sign', affordability)}
+            </Text>
           </View>
         </View>
       </Pressable>
@@ -63,13 +67,15 @@ const styles = StyleSheet.create({
   },
   infoBox: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     gap: 8,
     paddingTop: 16,
   },
-  timeBox: {
+  infoDetail: {
+    flex: 1,
     flexDirection: 'row',
     gap: 4,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   title: {
