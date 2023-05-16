@@ -6,8 +6,8 @@ import {
   Image,
   Platform,
 } from 'react-native';
-import React from 'react';
 import { FontAwesome5 } from '@expo/vector-icons';
+import ShadowCard from './ShadowCard';
 
 const renderIcons = (name, count) => {
   const icons = [];
@@ -19,8 +19,11 @@ const renderIcons = (name, count) => {
 
 const MealItem = ({ title, imageUrl, duration, complexity, affordability }) => {
   return (
-    <View style={styles.mealItem}>
-      <Pressable>
+    <ShadowCard stylesProp={styles.mealItem}>
+      <Pressable
+        android_ripple={{ color: '#ccc' }}
+        style={({ pressed }) => [pressed ? styles.mealItemPressed : null]}
+      >
         <Image source={{ uri: imageUrl }} style={styles.image} />
         <View style={styles.mealItemInner}>
           <Text style={styles.title}>{title}</Text>
@@ -38,7 +41,7 @@ const MealItem = ({ title, imageUrl, duration, complexity, affordability }) => {
           </View>
         </View>
       </Pressable>
-    </View>
+    </ShadowCard>
   );
 };
 
@@ -48,13 +51,10 @@ const styles = StyleSheet.create({
   mealItem: {
     margin: 15,
     backgroundColor: '#fff',
-    overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     borderRadius: 8,
-    elevation: 3,
-    shadowColor: 'black',
-    shadowOpacity: 0.26,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
+  },
+  mealItemPressed: {
+    opacity: 0.7,
   },
   mealItemInner: {
     padding: 16,
