@@ -1,6 +1,14 @@
-import { StyleSheet, Text, View, FlatList, ListRenderItem } from 'react-native';
-import { MEALS } from '../data/dummy-data';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ListRenderItem,
+  useAnimatedValue,
+} from 'react-native';
+import { MEALS, CATEGORIES } from '../data/dummy-data';
 import MealItem from '../components/MealItem';
+import { useLayoutEffect } from 'react';
 
 type Meal = {
   id: string;
@@ -18,10 +26,21 @@ type Meal = {
   isLactoseFree: boolean;
 };
 
-const MealsOverview = ({ route }) => {
-  const { categoryId } = route.params;
+const MealsOverview = ({ route, navigation }) => {
+  const catId = route.params.categoryId;
+
+  const categoryTitle = CATEGORIES.find(
+    (category) => category.id === catId
+  ).title;
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: categoryTitle,
+    });
+  }, [catId, navigation]);
+
   const displayMeals = MEALS.filter((meal) => {
-    return meal.categoryIds.indexOf(categoryId) >= 0;
+    return meal.categoryIds.indexOf(catId) >= 0;
   });
 
   const renderMealItem: ListRenderItem<Meal> = ({ item }) => {
