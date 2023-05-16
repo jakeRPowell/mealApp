@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import ShadowCard from './ShadowCard';
 
 const Step = ({ step }) => {
   return (
-    <View>
+    <ShadowCard>
       <Text>{step}</Text>
-    </View>
+    </ShadowCard>
   );
 };
 

@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  FlatList,
+  ListRenderItem,
+} from 'react-native';
 import { useLayoutEffect } from 'react';
 import { MEALS } from '../data/dummy-data';
 import ShadowCard from '../components/ShadowCard';
@@ -6,9 +13,19 @@ import renderIcons from '../utils/renderIcons';
 import Ingredients from '../components/Ingredients';
 import Step from '../components/Step';
 
+type Step = {
+  id: string;
+  step: string;
+};
+
 const MealDetailScreen = ({ route, navigation }) => {
   const details = route.params;
   const data = MEALS.find((meal) => meal.id === details.itemId);
+
+  const renderSteps: ListRenderItem<Step> = (step) => {
+    console.log(step.item);
+    return <Step step={step.item} />;
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({ title: details.title });
@@ -34,14 +51,10 @@ const MealDetailScreen = ({ route, navigation }) => {
         </ShadowCard>
 
         <ShadowCard stylesProp={styles.main}>
-          <Text>{data.duration}</Text>
-          <Text>{data.complexity}</Text>
-          <Text>{data.affordability}</Text>
           <Ingredients ingredients={data.ingredients} />
         </ShadowCard>
-        {data.steps.map((step) => (
-          <Step key={step} step={step} />
-        ))}
+
+        <FlatList data={data.steps} renderItem={renderSteps} />
       </View>
     </View>
   );
