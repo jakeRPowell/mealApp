@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, Text, View, FlatList, ListRenderItem } from 'react-native';
 import { CATEGORIES } from '../data/dummy-data';
 import CategoryGridTile from '../components/CategoryGridTile';
