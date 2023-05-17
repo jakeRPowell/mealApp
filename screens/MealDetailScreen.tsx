@@ -5,13 +5,19 @@ import {
   Image,
   FlatList,
   ListRenderItem,
+  ScrollView,
+  Button,
+  SafeAreaView,
 } from 'react-native';
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { MEALS } from '../data/dummy-data';
 import ShadowCard from '../components/ShadowCard';
 import renderIcons from '../utils/renderIcons';
 import Ingredients from '../components/Ingredients';
 import Step from '../components/Step';
+import MealDetailHeader from '../components/MealDetailHeader';
+import Title from '../components/ui/Title';
+import IconButton from '../components/ui/IconButton';
 
 type Step = {
   id: string;
@@ -21,76 +27,41 @@ type Step = {
 const MealDetailScreen = ({ route, navigation }) => {
   const details = route.params;
   const data = MEALS.find((meal) => meal.id === details.itemId);
+  const [isFavourited, setIsFavourited] = useState(false);
 
   const renderSteps: ListRenderItem<Step> = (step) => {
-    console.log(step.item);
     return <Step step={step.item} />;
   };
 
+  const favouriteHandler = () => {
+    setIsFavourited((prevState) => !prevState);
+    console.log(isFavourited);
+  };
+
   useLayoutEffect(() => {
-    navigation.setOptions({ title: details.title });
+    navigation.setOptions({
+      title: data.title,
+      headerRight: () => (
+        <IconButton
+          name="heart"
+          onPress={favouriteHandler}
+          color={isFavourited ? 'red' : 'black'}
+        />
+      ),
+    });
   }, []);
 
   return (
-    <View>
-      <Image source={{ uri: data.imageUrl }} style={styles.image} />
-      <View style={styles.container}>
-        <Text style={styles.title}>{data.title}</Text>
-
-        <ShadowCard stylesProp={styles.infoBox}>
-          <View style={styles.infoDetail}>
-            {renderIcons('clock')}
-            <Text>{data.duration}</Text>
-          </View>
-          <Text style={[{ textAlign: 'center' }, styles.infoDetail]}>
-            {renderIcons('cog', data.complexity)}
-          </Text>
-          <Text style={[{ textAlign: 'right' }, styles.infoDetail]}>
-            {renderIcons('pound-sign', data.affordability)}
-          </Text>
-        </ShadowCard>
-
-        <ShadowCard stylesProp={styles.main}>
-          <Ingredients ingredients={data.ingredients} />
-        </ShadowCard>
-
-        <FlatList data={data.steps} renderItem={renderSteps} />
-      </View>
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <FlatList
+        data={data.steps}
+        renderItem={renderSteps}
+        ListHeaderComponent={MealDetailHeader(data)}
+      />
+    </SafeAreaView>
   );
 };
 
 export default MealDetailScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-  image: {
-    width: '100%',
-    height: 300,
-  },
-  infoBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    gap: 8,
-    padding: 16,
-    borderRadius: 8,
-    marginBottom: 16,
-  },
-  infoDetail: {
-    flex: 1,
-    flexDirection: 'row',
-    gap: 4,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  main: {
-    padding: 16,
-    borderRadius: 8,
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 22,
-  },
-});
+const styles = StyleSheet.create({});
