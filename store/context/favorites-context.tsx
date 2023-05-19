@@ -10,12 +10,10 @@ function FavoritesContextProvider({ children }) {
   const [favoriteMealIds, setFavoriteMealIds] = useState<string[]>([]);
 
   function addFavoriteHandler(id: string) {
-    console.log(favoriteMealIds);
     setFavoriteMealIds((prevFavoriteMealIds) => [...prevFavoriteMealIds, id]);
   }
 
   function removeFavoriteHandler(id: string) {
-    console.log(favoriteMealIds);
     setFavoriteMealIds((prevFavoriteMealIds) =>
       prevFavoriteMealIds.filter((i) => i !== id)
     );
