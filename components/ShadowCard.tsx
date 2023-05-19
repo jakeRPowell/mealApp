@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     borderRadius: 8,
     marginBottom: 16,
-    padding: 16,
+
     marginHorizontal: 16,
   },
 });

@@ -5,11 +5,15 @@ import ShadowCard from './ShadowCard';
 const Step = ({ step }) => {
   return (
     <ShadowCard>
-      <Text>{step}</Text>
+      <Text style={styles.text}>{step}</Text>
     </ShadowCard>
   );
 };
 
 export default Step;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  text: {
+    padding: 16,
+  },
+});
