@@ -8,7 +8,7 @@ import { useContext, useLayoutEffect } from 'react';
 import { MEALS } from '../data/dummy-data';
 
 import Step from '../components/Step';
-import MealDetailHeader from '../components/MealDetailHeader';
+import MealDetailHeader from '../components/meals/MealDetailHeader';
 import IconButton from '../components/ui/IconButton';
 import { FavoritesContext } from '../store/context/favorites-context';
 

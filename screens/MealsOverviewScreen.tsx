@@ -7,7 +7,7 @@ import {
   useAnimatedValue,
 } from 'react-native';
 import { MEALS, CATEGORIES } from '../data/dummy-data';
-import MealItem from '../components/MealItem';
+import MealItem from '../components/meals/MealItem';
 import { useLayoutEffect } from 'react';
 
 type Meal = {

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
-import ShadowCard from './ShadowCard';
-import renderIcons from '../utils/renderIcons';
+import ShadowCard from '../ShadowCard';
+import renderIcons from '../../utils/renderIcons';
 
 const MealItem = ({
   title,

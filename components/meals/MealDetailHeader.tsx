@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
 import React from 'react';
-import { MEALS } from '../data/dummy-data';
+import { MEALS } from '../../data/dummy-data';
 import { useNavigation } from '@react-navigation/native';
-import ShadowCard from './ShadowCard';
-import Ingredients from './Ingredients';
-import renderIcons from '../utils/renderIcons';
-import Title from './ui/Title';
+import ShadowCard from '../ShadowCard';
+import Ingredients from '../Ingredients';
+import renderIcons from '../../utils/renderIcons';
+import Title from '../ui/Title';
 
 const MealDetailHeader = ({
   affordability,
