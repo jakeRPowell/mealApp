@@ -1,30 +1,7 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  ListRenderItem,
-  useAnimatedValue,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import { MEALS, CATEGORIES } from '../data/dummy-data';
-import MealItem from '../components/meals/MealItem';
 import { useLayoutEffect } from 'react';
-
-type Meal = {
-  id: string;
-  categoryIds: string[];
-  title: string;
-  affordability: string;
-  complexity: string;
-  imageUrl: string;
-  duration: number;
-  ingredients: string[];
-  steps: string[];
-  isGlutenFree: boolean;
-  isVegan: boolean;
-  isVegetarian: boolean;
-  isLactoseFree: boolean;
-};
+import MealsList from '../components/meals/MealsList';
 
 const MealsOverview = ({ route, navigation }) => {
   const catId = route.params.categoryId;
@@ -43,31 +20,7 @@ const MealsOverview = ({ route, navigation }) => {
     return meal.categoryIds.indexOf(catId) >= 0;
   });
 
-  const renderMealItem: ListRenderItem<Meal> = ({ item }) => {
-    const pressHandler = () => {
-      navigation.navigate('MealsDetail', { itemId: item.id });
-    };
-
-    const mealItemProps = {
-      title: item.title,
-      imageUrl: item.imageUrl,
-      duration: item.duration,
-      complexity: item.complexity,
-      affordability: item.affordability,
-      onPress: pressHandler,
-    };
-    return <MealItem {...mealItemProps} />;
-  };
-
-  return (
-    <View>
-      <FlatList
-        data={displayMeals}
-        renderItem={renderMealItem}
-        keyExtractor={(meal) => meal.id}
-      />
-    </View>
-  );
+  return <MealsList displayMeals={displayMeals} />;
 };
 
 export default MealsOverview;
